@@ -1,0 +1,24 @@
+CREATE TABLE komik (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL,
+    picture VARCHAR(255),
+    last_episode INT,
+    id_genre INT,
+    id_status INT,
+    update_at TIMESTAMP,
+    FOREIGN KEY (id_genre) REFERENCES genre(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_status) REFERENCES status(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE genre (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
