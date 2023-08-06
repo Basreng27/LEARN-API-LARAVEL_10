@@ -22,6 +22,17 @@ class KomikDetailResource extends JsonResource
             // 'id_status' => $this->whenLoaded('status'), // jadi jika disertakan dengan with sebelumnya kana terpanggil jika tidak maka tidak akan terpanggil
             'id_status_just_one' => $this->status->name, // hanya mengambil name saja
             'description' => $this->description,
+
+            // permisalan
+            // 'coments'=>$this->whenLoaded('coments',function(){ // Untuk mengulangi comen pada komik yang sama
+            //     return collect($this->coments)->each(function ($coment){
+            //         $coment->comentar;
+            //         return $coment;
+            //     });
+            // })
+            // 'coments_total' => $this->whenLoaded('coments', function () { // Menghitung total comentan dalam 1 komik
+            //     return $this->coments->count();
+            // })
         ];
     }
 }

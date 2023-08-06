@@ -6,6 +6,8 @@ use App\Http\Resources\KomikDetailResource;
 use App\Http\Resources\KomikResource;
 use App\Models\Komik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class KomikController extends Controller
 {
@@ -33,10 +35,18 @@ class KomikController extends Controller
             'id_status' => 'required|numeric',
         ]);
 
+        $pictureName = null;
+        if ($request->picture) {
+            $pictureName = $this->generateRandomString();
+            $extension = $request->picture->extension();
+
+            Storage::putFileAs('picture', $request->picture, $pictureName . '.' . $extension); // ('nama folder yang akan jadi tujuan simpan', 'filenya', 'nama file')
+        }
+
         $komik = Komik::create([
             'name' => $request->name,
             'slug' => str_replace(' ', '-', strtolower($request->name)),
-            'picture' => $request->picture,
+            'picture' => $pictureName ? $pictureName . '.' . $extension : null,
             'last_episode' => $request->last_episode,
             'id_status' => $request->id_status,
             'id_genre' => $request->id_genre,
@@ -74,5 +84,18 @@ class KomikController extends Controller
         $komik->delete();
 
         return response()->json(['message' => 'Deleted Data']);
+    }
+
+    function generateRandomString($length = 30)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+
+        return $randomString;
     }
 }
