@@ -21,6 +21,7 @@ class CreateKomikTable extends Migration
             $table->integer('last_episode');
             $table->unsignedBigInteger('id_genre');
             $table->unsignedBigInteger('id_status');
+            $table->text('description');
             $table->timestamps();
             $table->softDeletes(); // untuk softdelete tidak sepenuhnya terhapus dari database
 
