@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Komik extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected  $table = 'komik';
-    protected $fillabel = ['name', 'slug', 'picture', 'last_episode', 'id_genre', 'id_status', 'description'];
+    protected $fillable = ['name', 'slug', 'picture', 'last_episode', 'id_genre', 'id_status', 'description'];
 
     /**
      * Get the genre that owns the Komik
