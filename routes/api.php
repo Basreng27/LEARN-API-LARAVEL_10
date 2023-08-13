@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/regist', [AuthController::class, 'regist']);
 
 Route::middleware(['auth:sanctum'])->group(function () { //sanctum fungsinya cek apakah user login atau belum
     Route::get('/logged', [AuthController::class, 'logged']);

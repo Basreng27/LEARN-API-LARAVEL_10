@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AccountResource;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,5 +39,20 @@ class AuthController extends Controller
     {
         // get data yang sedang login
         return response()->json(Auth::user());
+    }
+
+    public function regist(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $account = Account::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return new AccountResource($account);
     }
 }

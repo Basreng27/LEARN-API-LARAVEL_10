@@ -75,7 +75,7 @@ class KomikController extends Controller
             'id_genre' => $request->id_genre,
         ]);
 
-        return new KomikDetailResource($komik->loadMissing(['genre:id,code,name', 'status'])); // loadMissing di gunakan untuk mengambil data terakhir atau 1 data
+        return new KomikDetailResource($komik->loadMissing(['genre:id,code,name', 'status'])); // loadMissing di gunakan untuk mengambil data terakhir atau 1 data dengan relasi
     }
 
     public function destroy($id)
