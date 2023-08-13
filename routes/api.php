@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\KomikController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,14 +10,23 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/regist', [AuthController::class, 'regist']);
 
 Route::middleware(['auth:sanctum'])->group(function () { //sanctum fungsinya cek apakah user login atau belum
+    // auth
     Route::get('/logged', [AuthController::class, 'logged']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
+    // komik
     Route::get('/komik', [KomikController::class, 'index']);
     Route::get('/komik/{id}', [KomikController::class, 'show']);
     Route::post('/komik', [KomikController::class, 'store']);
     Route::patch('/komik/{id}', [KomikController::class, 'update']);
     Route::delete('/komik/{id}', [KomikController::class, 'destroy']);
+
+    // genre
+    Route::get('/genre', [GenreController::class, 'index']);
+    Route::get('/genre/{id}', [GenreController::class, 'show']);
+    Route::post('/genre', [GenreController::class, 'store']);
+    Route::patch('/genre/{id}', [GenreController::class, 'update']);
+    Route::delete('/genre/{id}', [GenreController::class, 'destroy']);
 });
 
 
