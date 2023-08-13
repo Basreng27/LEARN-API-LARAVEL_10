@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\KomikController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::middleware(['auth:sanctum'])->group(function () { //sanctum fungsinya cek
     Route::post('/genre', [GenreController::class, 'store']);
     Route::patch('/genre/{id}', [GenreController::class, 'update']);
     Route::delete('/genre/{id}', [GenreController::class, 'destroy']);
+
+    // Status
+    Route::get('/status', [StatusController::class, 'index']);
+    Route::get('/status/{id}', [StatusController::class, 'show']);
+    Route::post('/status', [StatusController::class, 'store']);
+    Route::patch('/status/{id}', [StatusController::class, 'update']);
+    Route::delete('/status/{id}', [StatusController::class, 'destroy']);
 });
 
 

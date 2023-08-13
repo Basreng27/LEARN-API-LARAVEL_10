@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\AccountResource;
-use App\Http\Resources\GenreResource;
-use App\Models\Genre;
+use App\Http\Resources\StatusResource;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class StatusController extends Controller
 {
     public function index()
     {
-        $genres = Genre::all();
+        $statuss = Status::all();
 
-        return GenreResource::collection($genres);
+        return StatusResource::collection($statuss);
     }
 
     public function store(Request $request)
@@ -23,19 +22,19 @@ class GenreController extends Controller
             'name' => 'required',
         ]);
 
-        $genre = Genre::create([
+        $status = Status::create([
             'code' => $request->code,
             'name' => $request->name,
         ]);
 
-        return new GenreResource($genre);
+        return new StatusResource($status);
     }
 
     public function show($id)
     {
-        $genre = Genre::find($id);
+        $status = Status::find($id);
 
-        return new GenreResource($genre);
+        return new StatusResource($status);
     }
 
     public function update(Request $request, $id)
@@ -45,20 +44,20 @@ class GenreController extends Controller
             'name' => 'required',
         ]);
 
-        $genre = Genre::find($id);
-        $genre->update([
+        $status = Status::find($id);
+        $status->update([
             'code' => $request->code,
             'name' => $request->name,
         ]);
 
-        return new GenreResource($genre);
+        return new StatusResource($status);
     }
 
     public function destroy($id)
     {
-        $genre = Genre::find($id);
-        $genre->delete();
+        $status = Status::find($id);
+        $status->delete();
 
-        return response()->json(['message' => 'Deleted Data Genre Witth Code = ' . $genre->code]);
+        return response()->json(['message' => 'Deteled Data Status With Code = ' . $status->code]);
     }
 }
